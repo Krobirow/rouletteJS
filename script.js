@@ -9,32 +9,28 @@ function randomAmount() {
 }
 randomAmount(min, max);
 
-let userAmount = [+prompt('Угадай число от 1 до 100')];
+console.log(randomAmount());
+
+let userAmount =  parseInt(prompt('Угадай число от 1 до 100'), 10);
 console.log(typeof(userAmount));
 
-function checker () {
+const firstQuestion = function() {
+    console.log(typeof(userAmount));
+    console.log(randomAmount());
+
     if (typeof(userAmount) === isNaN || typeof(userAmount) === 'string') {
-        userAmount = +prompt('Введи число!');
-        // здесь надо рекурсия на введите число
-        // это ещё одно повторение
-        // if (typeof(userAmount) !== 'number' || typeof(userAmount) === isNaN || typeof(userAmount) === 'string') {
-        //     userAmount = prompt('Введи число!');
-        // }
-    } else if (typeof(userAmount) === null) {
-        return false;
-    } else {
+        userAmount = parseInt(prompt('Введи число!'), 10);
+    } else if (typeof(userAmount) === 'number') {
         if (userAmount > randomAmount()) {
             alert('Загаданное число больше');
-            // здесь надо рекурсия чтобы игра продолжалась пока не отменят
             userAmount = +prompt('Угадай число от 1 до 100');
         } else if (userAmount < randomAmount()) {
             alert('Загаданное число меньше');
-            // здесь надо рекурсия чтобы игра продолжалась пока не отменят
             userAmount = +prompt('Угадай число от 1 до 100');
-        }
+        } else if (userAmount === randomAmount()) {
+            alert("Поздравляю, вы угадали цифру");
+        } 
     }
-    console.log(typeof(userAmount));
-    console.log(typeof(randomAmount()));
-    console.log(randomAmount());
-}
-checker();
+    return firstQuestion();
+};
+firstQuestion();
