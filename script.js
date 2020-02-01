@@ -1,36 +1,48 @@
 'use strict';
-
-let min = 1,
+let randomAmount = function(min, max) {
+    min = 1;
     max = 100;
-function randomAmount() {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
-}
-randomAmount(min, max);
+};
 
-console.log(randomAmount());
+let num = randomAmount();
+let userAmount =  +prompt('Угадай число от 1 до 100');
 
-let userAmount =  parseInt(prompt('Угадай число от 1 до 100'), 10);
-console.log(typeof(userAmount));
+let firstQuestion = function() {
 
-const firstQuestion = function() {
-    console.log(typeof(userAmount));
-    console.log(randomAmount());
+    if ( Number.isNaN(userAmount) === true) {
+        userAmount = +prompt('Введи число!');
+    
+    } else if(userAmount === 0 || userAmount === null) {
+        alert('Игра прервана! Перезагрузите страницу для новой игры!');
+        return;
 
-    if (typeof(userAmount) === isNaN || typeof(userAmount) === 'string') {
-        userAmount = parseInt(prompt('Введи число!'), 10);
-    } else if (typeof(userAmount) === 'number') {
-        if (userAmount > randomAmount()) {
+    } else if (Number.isNaN(userAmount) === false) {
+        if (userAmount > num) {
             alert('Загаданное число больше');
-            userAmount = +prompt('Угадай число от 1 до 100');
-        } else if (userAmount < randomAmount()) {
+            userAmount =  +prompt('Угадай число от 1 до 100');
+
+        } else if ( userAmount < num) {
             alert('Загаданное число меньше');
-            userAmount = +prompt('Угадай число от 1 до 100');
-        } else if (userAmount === randomAmount()) {
-            alert("Поздравляю, вы угадали цифру");
-        } 
+            userAmount =  +prompt('Угадай число от 1 до 100');
+
+        } else if (userAmount === num) {
+            alert("Поздравляю, вы угадали цифру! Перезагрузите страницу для новой игры!");
+            return;
+        }
+    } else {
+        console.log('Что-то пошло не так!');
     }
     return firstQuestion();
 };
-firstQuestion();
+
+
+
+let closeFunc = function() {
+    // Вывожу цифру после первой попытки для тестов и вида что она не меняется.
+    console.log(num);
+
+    firstQuestion();
+}();
