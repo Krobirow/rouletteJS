@@ -14,7 +14,6 @@ let headFunction = function() {
     let num = randomAmount();
 
     let question = function() {
-
         if ( Number.isNaN(userAmount) === true) {
             userAmount = +prompt('Введи число!');
         
@@ -23,21 +22,25 @@ let headFunction = function() {
             return;
     
         } else if (Number.isNaN(userAmount) === false) {
-            if (userAmount > num) {
+            if (userAmount < 100 && userAmount > num) {
                 alert('Загаданное число больше');
-                userAmount =  +prompt('Угадай число от 1 до 100');
+                userAmount = +prompt('Угадай число от 1 до 100');
     
-            } else if ( userAmount < num) {
+            } else if (userAmount < 100 && userAmount < num) {
                 alert('Загаданное число меньше');
-                userAmount =  +prompt('Угадай число от 1 до 100');
+                userAmount = +prompt('Угадай число от 1 до 100');
     
             } else if (userAmount === num) {
                 alert("Поздравляю, вы угадали цифру! Перезагрузите страницу для новой игры!");
                 return;
+            } else {
+                alert("Вы ввели число больше 100!");
+                userAmount = +prompt('Угадай число от 1 до 100');
             }
         }
         return question();
     };
+    // вывод результата в консоль для теста, после первого ввода
     console.log(num);
     return question();
 };
