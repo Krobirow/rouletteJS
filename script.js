@@ -1,50 +1,38 @@
 'use strict';
+function isNum(number) {
+    return (!isNaN(parseFloat(number)) && isFinite(number));
+}
 
-let userAmount =  +prompt('Угадай число от 1 до 100');
-        
-let headFunction = function() {
-    
-    let randomAmount = function(min, max) {
-        min = 1;
-        max = 100;
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    };
-    let num = randomAmount();
+const game = function() {
+    const randomNum =  Math.floor(Math.random() * 100) + 1;
+    console.log(randomNum);
 
-    let question = function() {
-        if ( Number.isNaN(userAmount) === true) {
-            userAmount = +prompt('Введи число!');
-        
-        } else if(userAmount === 0 || userAmount === null) {
-            alert('Игра прервана! Перезагрузите страницу для новой игры!');
-            return;
-    
-        } else if (Number.isNaN(userAmount) === false) {
-            if (userAmount < 100 && userAmount > num) {
+    return function question() {
+        let userAmount = prompt('Угадай число от 1 до 100');
+
+        if (isNum(userAmount)) {
+            userAmount = +userAmount;
+            
+            if (userAmount < 101 && userAmount > randomNum) {
                 alert('Загаданное число больше');
-                userAmount = +prompt('Угадай число от 1 до 100');
-    
-            } else if (userAmount < 100 && userAmount < num) {
+                question();
+            } else if (userAmount < 101 && userAmount < randomNum) {
                 alert('Загаданное число меньше');
-                userAmount = +prompt('Угадай число от 1 до 100');
-    
-            } else if (userAmount === num) {
+                question();
+            } else if (userAmount === randomNum) {
                 alert("Поздравляю, вы угадали цифру! Перезагрузите страницу для новой игры!");
-                return;
             } else {
                 alert("Вы ввели число больше 100!");
-                userAmount = +prompt('Угадай число от 1 до 100');
+                question();
             }
+        } else if(userAmount === null) {
+            alert('Вы прервали игру! Перезагрузите страницу для новой игры!');
+        } else {
+            alert('Введите число!');
+            question();
         }
-        return question();
     };
-    // вывод результата в консоль для теста, после первого ввода
-    console.log(num);
-    return question();
 };
 
-let closeFunc = function() {
-    headFunction();
-}();
+let playGame = game();
+playGame();
