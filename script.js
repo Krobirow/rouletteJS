@@ -14,10 +14,10 @@ const game = function() {
             userAmount = +userAmount;
             
             if (userAmount < 101 && userAmount > randomNum) {
-                alert('Загаданное число больше');
+                alert('Загаданное число меньше');
                 question();
             } else if (userAmount < 101 && userAmount < randomNum) {
-                alert('Загаданное число меньше');
+                alert('Загаданное число больше');
                 question();
             } else if (userAmount === randomNum) {
                 alert("Поздравляю, вы угадали цифру! Перезагрузите страницу для новой игры!");
