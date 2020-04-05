@@ -84,4 +84,6 @@ const game = function() {
 };
 
 let playGame = game();
+
 playGame(quantityOfRepeats);
+console.log();
